@@ -41,7 +41,3 @@ class PixelProcessing:
             average_rgb = list(map(str, average_rgb))
             new_img_name = '_'.join(average_rgb) + '_' + img_name
             cv2.imwrite(os.path.join(self.Pixel_ROOT, new_img_name), img)
-
-
-pp = PixelProcessing()
-pp.processing1()

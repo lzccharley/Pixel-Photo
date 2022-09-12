@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-@FileName: image_fusion.py
+@FileName: pixel_fusion.py
 @Software: PyCharm
 @Function: ...
 
@@ -37,14 +37,14 @@ class PixelFusion:
         for pixel_name in self.pixels_name:
             pixel_rgb100 = re.match(r"(\d+)_(\d+)_(\d+)_.+jpg", pixel_name)
             self.pixels_detail.append((pixel_rgb100.group(1), pixel_rgb100.group(2), pixel_rgb100.group(3)))
-        self.pixels_tree = cKDTree(self.pixels_detail)  # KDtree加速寻找最相近的像素图像
+        self.pixels_tree = cKDTree(self.pixels_detail)  # KDTree加速寻找最相近的像素图像
         # print(self.pixels_tree.query([22249, 23341, 24678]))
 
-    def fusion(self):
+    def fusion(self, reduction=TARGET_REDUCTION):
         for target_name in tqdm(self.targets_name):
             target = cv2.imread(os.path.join(self.target_root, target_name))
-            height = target.shape[0] // TARGET_REDUCTION
-            width = target.shape[1] // TARGET_REDUCTION
+            height = target.shape[0] // reduction
+            width = target.shape[1] // reduction
             target = cv2.resize(target, (width, height))
             row = []
             for w in range(width):
@@ -58,10 +58,3 @@ class PixelFusion:
                 row.append(img)
             img = np.concatenate(row, 1)
             cv2.imwrite(os.path.join(self.result_root, target_name), img)
-            # cv2.imshow('1', img)
-            # cv2.waitKey(0)
-            # cv2.destroyAllWindows()
-
-
-PF = PixelFusion()
-PF.fusion()
