@@ -40,7 +40,7 @@ class PixelFusion:
         self.pixels_tree = cKDTree(self.pixels_detail)  # KDTree加速寻找最相近的像素图像
         # print(self.pixels_tree.query([22249, 23341, 24678]))
 
-    def fusion(self, reduction=TARGET_REDUCTION):
+    def rgb_fusion(self, reduction=TARGET_REDUCTION):
         for target_name in tqdm(self.targets_name):
             target = cv2.imread(os.path.join(self.target_root, target_name))
             height = target.shape[0] // reduction

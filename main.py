@@ -17,4 +17,4 @@ if __name__ == "__main__":
     pp = PixelProcessing()
     pp.processing1()
     PF = PixelFusion()
-    PF.fusion(10)
+    PF.rgb_fusion()
