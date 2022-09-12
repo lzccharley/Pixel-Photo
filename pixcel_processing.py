@@ -18,7 +18,9 @@ import numpy as np
 
 IMG_ROOT = "./original_images"
 PIXEL_ROOT = "./pixels"
-PIXEL_BASE = 128
+# 像素图像大小
+PIXEL_BASE = 64
+
 
 class PixelProcessing:
     def __init__(self, img_root=IMG_ROOT, pixel_root=PIXEL_ROOT, is_clear=True):
